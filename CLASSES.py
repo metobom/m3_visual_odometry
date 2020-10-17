@@ -88,8 +88,6 @@ class GET_OBJ_PTS:
         proj_mat1 = np.concatenate([R, t.reshape(3, 1)], axis = 1)
         pts0, pts1 = self.normalize(pts0), self.normalize(pts1) 
         pts4d = cv2.triangulatePoints(proj_mat0, proj_mat1, pts0.T, pts1.T).T
-        #goodies = np.abs(pts4d[:, 3]) > GOODIES_TH
-        #pts4d = pts4d[goodies]
         pts4d /= pts4d[:, 3:]
         goodZs = pts4d[:, 2] < 0
         out = pts4d[goodZs]
